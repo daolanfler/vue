@@ -72,6 +72,7 @@ export function createPatchFunction(backend) {
   for (i = 0; i < hooks.length; ++i) {
     cbs[hooks[i]] = []
     for (j = 0; j < modules.length; ++j) {
+      // modules 在这里定义： src/platforms/web/runtime/modules/index.ts
       if (isDef(modules[j][hooks[i]])) {
         cbs[hooks[i]].push(modules[j][hooks[i]])
       }
@@ -632,6 +633,7 @@ export function createPatchFunction(backend) {
     const oldCh = oldVnode.children
     const ch = vnode.children
     if (isDef(data) && isPatchable(vnode)) {
+      // 做更新的操作 例如：更新属性 更新事件 更新样式等
       for (i = 0; i < cbs.update.length; ++i) cbs.update[i](oldVnode, vnode)
       if (isDef((i = data.hook)) && isDef((i = i.update))) i(oldVnode, vnode)
     }
